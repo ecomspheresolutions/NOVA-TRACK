@@ -6,6 +6,9 @@
   <meta name="description" content="NOVA TRACK — personal digital wellbeing and productivity dashboard." />
   <title>NOVA TRACK</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="cloud.js"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -22,10 +25,28 @@
       <button class="nav-item settings" data-view="settings">Settings</button>
     </aside>
     <main class="main">
-      <header class="topbar"><div><p class="eyebrow">PERSONAL PRODUCTIVITY INTELLIGENCE</p><h1 id="page-title">Dashboard</h1></div><div class="date" id="today"></div></header>
+      <header class="topbar">
+        <div><p class="eyebrow">PERSONAL PRODUCTIVITY INTELLIGENCE</p><h1 id="page-title">Dashboard</h1></div>
+        <div class="top-actions"><div class="date" id="today"></div><button class="account-btn" id="account-btn">Account</button></div>
+      </header>
       <section id="view" class="view"></section>
     </main>
   </div>
+  <div id="account-modal" class="modal hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="account-close">×</button>
+      <h2>Cloud account</h2>
+      <p class="muted" id="cloud-status">Checking cloud configuration…</p>
+      <div id="auth-form">
+        <input id="auth-email" type="email" placeholder="Email" autocomplete="email" />
+        <input id="auth-password" type="password" placeholder="Password" autocomplete="current-password" />
+        <div class="auth-actions"><button class="btn" id="sign-in">Sign in</button><button class="btn secondary" id="sign-up">Create account</button></div>
+        <small class="muted">Your browser data can be migrated after the first successful sign-in.</small>
+      </div>
+      <button class="btn secondary hidden" id="sign-out">Sign out</button>
+    </div>
+  </div>
   <script src="app.js"></script>
+  <script src="auth-ui.js"></script>
 </body>
 </html>
