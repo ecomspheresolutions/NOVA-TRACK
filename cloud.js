@@ -12,10 +12,10 @@ async function migrateLocalData(user){
  const checks=await Promise.all(["goals","habits","focus_sessions","timeline_events"].map(t=>cloud.from(t).select("id").eq("user_id",user.id).limit(1)));
  if(checks.some(x=>x.error))throw checks.find(x=>x.error).error;
  if(checks.some(x=>x.data?.length))return false;
- if(existing.goals.length)await cloud.from("goals").insert(existing.goals.map(x=>({user_id:user.id,title:x.title,done:Boolean(x.done),completed_at:x.done?new Date().toISOString():null})));
- if(existing.habits.length)await cloud.from("habits").insert(existing.habits.map(x=>({user_id:user.id,title:x.title,streak:x.streak||0,last_completed_date:x.last||null})));
- if(existing.sessions.length)await cloud.from("focus_sessions").insert(existing.sessions.map(x=>({user_id:user.id,date:x.date,minutes:x.minutes||25,status:"completed"})));
- if(existing.timeline.length)await cloud.from("timeline_events").insert(existing.timeline.map(x=>({user_id:user.id,date:x.date,time:(x.time||"00:00").slice(0,8),type:"activity",text:x.text,metadata:{}})));
+ if(existing.goals.length){const r=await cloud.from("goals").insert(existing.goals.map(x=>({user_id:user.id,title:x.title,done:Boolean(x.done),completed_at:x.done?new Date().toISOString():null})));if(r.error)throw r.error;}
+ if(existing.habits.length){const r=await cloud.from("habits").insert(existing.habits.map(x=>({user_id:user.id,title:x.title,streak:x.streak||0,last_completed_date:x.last||null})));if(r.error)throw r.error;}
+ if(existing.sessions.length){const r=await cloud.from("focus_sessions").insert(existing.sessions.map(x=>({user_id:user.id,date:x.date,minutes:x.minutes||25,status:x.status||"completed",started_at:x.startedAt||null,completed_at:x.completedAt||null})));if(r.error)throw r.error;}
+ if(existing.timeline.length){const r=await cloud.from("timeline_events").insert(existing.timeline.map(x=>({user_id:user.id,date:x.date,time:(x.time||"00:00").slice(0,8),type:x.type||"activity",text:x.text,metadata:x.metadata||{}})));if(r.error)throw r.error;}
  return true;
 }
 
