@@ -43,4 +43,6 @@ async function cloudDeleteAll(){if(!cloud)throw new Error("Supabase is not confi
 
 async function cloudGetProfile(){if(!cloud)return null;const user=await getUser();if(!user)return null;const{data,error}=await cloud.from("user_profiles").select("id,display_name,timezone,settings,created_at,updated_at").eq("id",user.id).maybeSingle();if(error)throw error;return data}
 async function cloudUpdateProfile(changes){if(!cloud)throw new Error("Supabase is not configured yet.");const user=await getUser();if(!user)throw new Error("Sign in first.");const{data,error}=await cloud.from("user_profiles").upsert({...changes,id:user.id}).select().single();if(error)throw error;return data}
+async function cloudAchievements(user){if(!cloud||!user)return[];const{data,error}=await cloud.from("achievements").select("id,key,unlocked_at").eq("user_id",user.id).order("unlocked_at");if(error)throw error;return data||[]}
+async function cloudUnlockAchievement(key){if(!cloud) return null;const user=await getUser();if(!user)return null;const{data,error}=await cloud.from("achievements").upsert({user_id:user.id,key:key},{onConflict:"user_id,key"}).select().single();if(error)throw error;return data}
 async function cloudStatus(){const user=await getUser();return{configured:SUPABASE_READY,user}}
