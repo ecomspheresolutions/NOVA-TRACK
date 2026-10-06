@@ -1,40 +1,64 @@
 # NOVA TRACK
 
-NOVA TRACK is a personal Digital Wellbeing & Productivity Platform designed to help track activity, goals, habits, focus sessions, achievements, and productivity insights.
+NOVA TRACK is a personal Digital Wellbeing & Productivity Platform designed to help answer four questions:
 
-## V1 scope
+1. Where did my time go?
+2. What did I accomplish?
+3. What caused distraction?
+4. What should I change?
+
+## V1 core features
 
 - Dashboard
-- Activity tracking
-- Goals
+- Goals and completion tracking
 - Habits and streaks
-- Focus timer
-- Analytics
+- 25-minute focus sessions
+- Activity timeline
+- Productivity score
+- Activity history
 - Achievements
-- Settings
+- Local browser persistence
+- Responsive interface
 
 ## Current build status
 
-**Stage 1 — V1 interface foundation is now implemented.**
+### Stage 1 — Interface foundation
+Complete.
 
-The repository contains a lightweight browser-based V1 shell with:
-- Responsive NOVA TRACK dashboard
-- Navigation for all planned V1 areas
-- Initial dashboard metrics
-- Daily timeline placeholder
-- 25-minute focus timer
-- Placeholder states for goals, habits, analytics, achievements and settings
+### Stage 2 — Local V1 tracking
+Complete:
+- Persistent goals
+- Persistent habits and streaks
+- Focus sessions
+- Timeline events
+- Productivity scoring
+- Analytics/history
+- Achievement rules
 
-This first stage deliberately uses plain HTML, CSS and JavaScript so the interface can be tested immediately without a build system.
+### Stage 3 — Account and cloud architecture
+Next.
 
-## Next stages
+The current V1 intentionally stores data in the browser. This keeps the prototype simple and avoids pretending that cloud synchronization already exists.
 
-1. Add persistent data storage.
-2. Implement goals and habits CRUD.
-3. Persist focus sessions and build daily timeline records.
-4. Add analytics and achievement calculations.
-5. Add authentication/privacy controls.
-6. Move toward permitted Android/Windows companion tracking.
+## Stage 3 plan
+
+1. Define the application data model.
+2. Choose the authentication/database architecture.
+3. Add user identity and secure data ownership.
+4. Add cloud synchronization.
+5. Add migration from existing local V1 data.
+6. Add privacy controls.
+7. Test cross-device behavior.
+
+## Future device architecture
+
+After the cloud foundation is stable:
+
+**Android companion → permitted device usage data → NOVA TRACK cloud → web dashboard**
+
+**Windows companion → permitted desktop activity → NOVA TRACK cloud → web dashboard**
+
+Device integrations will only report data that the operating system and user permissions technically allow.
 
 ## Development principles
 
@@ -43,12 +67,16 @@ This first stage deliberately uses plain HTML, CSS and JavaScript so the interfa
 3. Keep user data and privacy central.
 4. Build in small, testable stages.
 5. Document important architecture and product decisions.
+6. Separate local prototype data from future authenticated cloud data.
 
-## Planned architecture
+## Repository structure
 
-Web dashboard → application/data layer → persistent database
+- `index.html` — application shell
+- `styles.css` — interface styling
+- `app.js` — V1 application logic and local data layer
 
-Later:
-- Android companion for permitted device-usage data
-- Windows companion for desktop activity
-- Cross-device synchronization
+## Status
+
+**Local V1 prototype: functional foundation complete.**
+
+**Cloud/account layer: not yet implemented.**
