@@ -13,6 +13,29 @@ NOVA TRACK is a personal Digital Wellbeing & Productivity Platform designed to h
 - Achievements
 - Settings
 
+## Current build status
+
+**Stage 1 — V1 interface foundation is now implemented.**
+
+The repository contains a lightweight browser-based V1 shell with:
+- Responsive NOVA TRACK dashboard
+- Navigation for all planned V1 areas
+- Initial dashboard metrics
+- Daily timeline placeholder
+- 25-minute focus timer
+- Placeholder states for goals, habits, analytics, achievements and settings
+
+This first stage deliberately uses plain HTML, CSS and JavaScript so the interface can be tested immediately without a build system.
+
+## Next stages
+
+1. Add persistent data storage.
+2. Implement goals and habits CRUD.
+3. Persist focus sessions and build daily timeline records.
+4. Add analytics and achievement calculations.
+5. Add authentication/privacy controls.
+6. Move toward permitted Android/Windows companion tracking.
+
 ## Development principles
 
 1. Build a working V1 before advanced device integrations.
@@ -29,7 +52,3 @@ Later:
 - Android companion for permitted device-usage data
 - Windows companion for desktop activity
 - Cross-device synchronization
-
-## Status
-
-Project foundation is being initialized.
