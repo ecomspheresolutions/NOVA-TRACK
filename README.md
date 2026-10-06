@@ -41,6 +41,7 @@ Complete:
 The repository now includes:
 - Supabase/PostgreSQL schema
 - User ownership through `auth.users`
+- User profile foundation with timezone/settings support
 - Row Level Security policies
 - Database indexes
 - Supabase setup documentation
@@ -52,10 +53,10 @@ The actual Supabase project is **not connected yet**. No credentials or secrets 
 1. Define the application data model. **Complete**
 2. Choose the authentication/database architecture. **Complete — Supabase**
 3. Add user identity and secure data ownership. **Schema prepared; app connection next**
-4. Add cloud synchronization.
-5. Add migration from existing local V1 data.
-6. Add privacy controls.
-7. Test cross-device behavior.
+4. Add cloud synchronization. **Application layer prepared; live connection pending**
+5. Add migration from existing local V1 data. **Implemented in application layer**
+6. Add privacy controls. **Implemented**
+7. Test cross-device behavior. **Pending real Supabase project**
 
 ## Future device architecture
 
@@ -91,4 +92,6 @@ Device integrations will only report data that the operating system and user per
 
 **Cloud database architecture: prepared.**
 
-**Supabase project connection and cloud sync: next implementation step.**
+**Cloud application layer: prepared.**
+
+**Supabase project connection and live cloud testing: next implementation step.**
