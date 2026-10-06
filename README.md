@@ -35,16 +35,23 @@ Complete:
 - Analytics/history
 - Achievement rules
 
-### Stage 3 — Account and cloud architecture
-Next.
+### Stage 3 — Cloud foundation
+**Database architecture prepared.**
 
-The current V1 intentionally stores data in the browser. This keeps the prototype simple and avoids pretending that cloud synchronization already exists.
+The repository now includes:
+- Supabase/PostgreSQL schema
+- User ownership through `auth.users`
+- Row Level Security policies
+- Database indexes
+- Supabase setup documentation
+
+The actual Supabase project is **not connected yet**. No credentials or secrets are stored in the repository.
 
 ## Stage 3 plan
 
-1. Define the application data model.
-2. Choose the authentication/database architecture.
-3. Add user identity and secure data ownership.
+1. Define the application data model. **Complete**
+2. Choose the authentication/database architecture. **Complete — Supabase**
+3. Add user identity and secure data ownership. **Schema prepared; app connection next**
 4. Add cloud synchronization.
 5. Add migration from existing local V1 data.
 6. Add privacy controls.
@@ -68,15 +75,20 @@ Device integrations will only report data that the operating system and user per
 4. Build in small, testable stages.
 5. Document important architecture and product decisions.
 6. Separate local prototype data from future authenticated cloud data.
+7. Never commit private backend secrets.
 
 ## Repository structure
 
 - `index.html` — application shell
 - `styles.css` — interface styling
 - `app.js` — V1 application logic and local data layer
+- `supabase/migrations/001_initial_schema.sql` — initial cloud database schema
+- `SUPABASE_SETUP.md` — cloud setup and security notes
 
 ## Status
 
 **Local V1 prototype: functional foundation complete.**
 
-**Cloud/account layer: not yet implemented.**
+**Cloud database architecture: prepared.**
+
+**Supabase project connection and cloud sync: next implementation step.**
