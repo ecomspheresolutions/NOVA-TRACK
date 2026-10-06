@@ -39,5 +39,6 @@ async function loadCloudData(user){
 async function cloudInsert(table,row){if(!cloud)return null;const user=await getUser();if(!user)return null;const{data,error}=await cloud.from(table).insert({...row,user_id:user.id}).select().single();if(error)throw error;return data}
 async function cloudUpdate(table,id,changes){if(!cloud)return null;const user=await getUser();if(!user)return null;const{data,error}=await cloud.from(table).update(changes).eq("id",id).eq("user_id",user.id).select().single();if(error)throw error;return data}
 async function cloudDelete(table,id){if(!cloud)return null;const user=await getUser();if(!user)return null;const{error}=await cloud.from(table).delete().eq("id",id).eq("user_id",user.id);if(error)throw error}
+async function cloudDeleteAll(){if(!cloud)throw new Error("Supabase is not configured yet.");const user=await getUser();if(!user)throw new Error("Sign in first.");for(const table of ["timeline_events","focus_sessions","achievements","habits","goals"]){const{error}=await cloud.from(table).delete().eq("user_id",user.id);if(error)throw error}return true}
 
 async function cloudStatus(){const user=await getUser();return{configured:SUPABASE_READY,user}}
