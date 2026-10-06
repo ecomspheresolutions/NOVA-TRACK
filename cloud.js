@@ -41,4 +41,6 @@ async function cloudUpdate(table,id,changes){if(!cloud)return null;const user=aw
 async function cloudDelete(table,id){if(!cloud)return null;const user=await getUser();if(!user)return null;const{error}=await cloud.from(table).delete().eq("id",id).eq("user_id",user.id);if(error)throw error}
 async function cloudDeleteAll(){if(!cloud)throw new Error("Supabase is not configured yet.");const user=await getUser();if(!user)throw new Error("Sign in first.");for(const table of ["timeline_events","focus_sessions","achievements","habits","goals"]){const{error}=await cloud.from(table).delete().eq("user_id",user.id);if(error)throw error}return true}
 
+async function cloudGetProfile(){if(!cloud)return null;const user=await getUser();if(!user)return null;const{data,error}=await cloud.from("user_profiles").select("id,display_name,timezone,settings,created_at,updated_at").eq("id",user.id).maybeSingle();if(error)throw error;return data}
+async function cloudUpdateProfile(changes){if(!cloud)throw new Error("Supabase is not configured yet.");const user=await getUser();if(!user)throw new Error("Sign in first.");const{data,error}=await cloud.from("user_profiles").upsert({...changes,id:user.id}).select().single();if(error)throw error;return data}
 async function cloudStatus(){const user=await getUser();return{configured:SUPABASE_READY,user}}
